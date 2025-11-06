@@ -23,4 +23,3 @@ If you are developing a production application, we recommend using TypeScript wi
 ## Optimized API Calls by debouncing input search"
 ## The movie DB API - https://developer.themoviedb.org/docs/getting-started
 ## https://cloud.appwrite.io/
-## So far - 
