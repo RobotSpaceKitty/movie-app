@@ -11,13 +11,14 @@ import { getTrendingMovies, updateSearchCount } from "./appwrite";
 const API_BASE_URL = "https://api.themoviedb.org/3";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+
 const API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization: `Bearer ${API_KEY}`,
   },
 };
+
 
 const App = () => {
   //state variables
@@ -34,6 +35,7 @@ const App = () => {
   useDebounce(() => setdebouncedSearchTerm(searchTerm), 700, [searchTerm]);
 
   const fetchMovies = async (query = "") => {
+
     //turn on loading, error response handler
     setIsLoading(true);
     setErrorMessage("");
@@ -41,8 +43,8 @@ const App = () => {
     try {
       //fetch movie data from API
       const endpoint = query
-        ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}`
-        : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
+        ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}&api_key=${API_KEY}`
+        : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc&api_key=${API_KEY}`;
 
       const response = await fetch(endpoint, API_OPTIONS);
       //check for response status
@@ -111,7 +113,7 @@ const App = () => {
             <h2 className="">Trending Movies</h2>
             <ul>
               {trendingMovies.map((movie, index) => (
-                console.log(movie),
+                /*console.log(movie),*/
                 <li key={movie.$id}>
                   <p className="text-white text-6xl">{index + 1}</p>
                   <img src={movie.poster_url} alt={movie.searchTerm} />
